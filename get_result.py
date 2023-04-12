@@ -11,21 +11,25 @@ start = '2017-01-01'
 end = '2020-12-31'
 strategies = ['SMA', 'RSI']
 periodRange = range(10, 31)
-plot = False
+plot = True
 
 
 for strategy in strategies:
 
-    for data in os.listdir("./data"):
+    for data in os.listdir("./cand"):
 
-        datapath = 'data/' + data
+        datapath = 'cand/' + data
         sep = datapath[5:-4].split(sep='-') # ignore name file 'data/' and '.csv'
         # sep[0] = pair; sep[1] = year start; sep[2] = year end; sep[3] = timeframe
 
         print('\n ------------ ', datapath)
         print()
 
-        dataname = 'result/{}-{}-{}-{}-{}.csv'.format(strategy, sep[0], start.replace('-',''), end.replace('-',''), sep[3])
+        start = sep[1]
+        end = sep[2]
+
+        dataname = 'result/{}-{}-{}-{}-{}.csv'.format(strategy, sep[0], sep[1],sep[2], sep[3])
+        print("dataname is",dataname)
         csvfile = open(dataname, 'w', newline='')
         result_writer = csv.writer(csvfile, delimiter=',')
 

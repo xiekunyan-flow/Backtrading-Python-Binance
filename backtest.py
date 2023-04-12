@@ -180,6 +180,9 @@ def timeFrame(datapath):
     elif tf == '8h':
         compression = 480
         timeframe = bt.TimeFrame.Minutes
+    elif tf == '1min':
+        compression = 1
+        timeframe = bt.TimeFrame.Minutes
     else:
         print('dataframe not recognized')
         exit()
@@ -214,6 +217,8 @@ def runbacktest(datapath, start, end, period, strategy, commission_val=None, por
         cerebro.addstrategy(SMAStrategy, maperiod=period, quantity=quantity)
     elif strategy == 'RSI':
         cerebro.addstrategy(RSIStrategy, maperiod=period, quantity=quantity)
+    elif strategy == 'BTCTUPO':
+        cerebro.addstrategy(RSIStrategy, maperiod=period, quantity=quantity)
     else :
         print('no strategy')
         exit()
@@ -226,8 +231,8 @@ def runbacktest(datapath, start, end, period, strategy, commission_val=None, por
         dtformat = 2, 
         compression = compression, 
         timeframe = timeframe,
-        fromdate = datetime.datetime.strptime(start, '%Y-%m-%d'),
-        todate = datetime.datetime.strptime(end, '%Y-%m-%d'),
+        fromdate = datetime.datetime.strptime(start, '%Y%m%d'),
+        todate = datetime.datetime.strptime(end, '%Y%m%d'),
         reverse = False)
 
 
